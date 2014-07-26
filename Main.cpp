@@ -8,7 +8,10 @@ using namespace std;
 
 void main()
 {
-
+	Array<int> A(3);
+	A[0] = 0;
+	A[1] = 3;
+	A[2] = 1;
 
 	// END:
 	cout << "tada!" << endl;
