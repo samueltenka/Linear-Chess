@@ -13,6 +13,7 @@ public:
 	Vector();
 	Vector operator=(Vector other); // copy
 	void print();
+	void print_fancy();
 
 	Scalar mag();
 	void normalize();
