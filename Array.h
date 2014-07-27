@@ -1,15 +1,33 @@
+#include <cstdlib> // for NULL
+
+
 #ifndef ARRAY
 #define ARRAY
-
 template<typename T>
 class Array
 {
-private:
+protected:
 	T* data;
+	int length;
 
 public:
-	const int length;
+	//
+	// for declaring w/o immediate initialization:
+	Array()
+	{
+		data = NULL;
+	}
+	void initialize(int l)
+	{
+		if(data == NULL) // "initialize" only works once
+		{
+			length = l;
+			data = new T[l];
+		}
+	}
 
+	//
+	// for immediate initialization:
 	Array(int l):
 		length(l)
 	{
@@ -20,7 +38,7 @@ public:
 	{
 		return data[r];
 	}
-	
+
 	~Array()
 	{
 		delete[] data;
