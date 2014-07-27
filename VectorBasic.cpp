@@ -8,6 +8,15 @@ Vector::Vector(int d):
 	Array(d)
 {
 }
+Vector::Vector(const Vector& other):
+	dimension(other.dimension),
+	Array(other.dimension)
+{
+	for(int r = 0; r < dimension; r++)
+	{
+		(*this)[r] = other[r];
+	}
+}
 Vector& Vector::operator=(const Vector& other) // copy
 {
 	for(int r = 0; r < dimension; r++)
