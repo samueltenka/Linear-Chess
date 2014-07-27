@@ -8,10 +8,18 @@ using namespace std;
 
 void main()
 {
-	Array<int> A(3);
-	A[0] = 0;
-	A[1] = 3;
-	A[2] = 1;
+	// TEST VectorBasic.cpp:
+	Vector V(5);
+	V[0] = 0;
+	V[1] = 3;
+	V[2] = -9.8;
+	V[3] = 3;
+	V[4] = 1;
+	V.print_fancy();
+
+	Vector W(5);
+	W = V;
+	W.print_fancy();
 
 	// END:
 	cout << "tada!" << endl;
