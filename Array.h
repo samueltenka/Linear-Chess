@@ -15,15 +15,12 @@ public:
 	{
 		data = new T[l];
 	}
-	Array()
-	{
-	}
 
-	T& operator[](int i) // by reference, so both gets and sets.
+	T& operator[](int r) const
 	{
-		return data[i];
+		return data[r];
 	}
-
+	
 	~Array()
 	{
 		delete[] data;
