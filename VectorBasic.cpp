@@ -8,7 +8,7 @@ Vector::Vector(int d):
 	Array(d)
 {
 }
-Vector& Vector::operator=(Vector& other) // copy
+Vector& Vector::operator=(const Vector& other) // copy
 {
 	for(int r = 0; r < dimension; r++)
 	{
