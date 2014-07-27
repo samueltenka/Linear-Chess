@@ -12,14 +12,14 @@ private:
 public:
 	Matrix(int h, int w);
 	Matrix();
-	Matrix operator=(Matrix other); // copy
+	Matrix& operator=(Matrix other); // copy
 	void print();
 
-	Matrix operator+=(Matrix other);
-	Matrix operator-=(Matrix other);
-	Matrix operator*=(Matrix other);
-	Matrix operator*=(Scalar scale);
-	Matrix operator/=(Scalar scale);
+	Matrix& operator+=(Matrix other);
+	Matrix& operator-=(Matrix other);
+	Matrix& operator*=(Matrix other);
+	Matrix& operator*=(Scalar scale);
+	Matrix& operator/=(Scalar scale);
 
 	Matrix operator+(Matrix other);
 	Matrix operator-(Matrix other);
