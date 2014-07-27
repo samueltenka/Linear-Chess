@@ -1,21 +1,16 @@
 #include "Scalar.h"
 #include "Array.h"
 
-
 #ifndef VECTOR
 #define VECTOR
 class Vector: public Array<Scalar>
 {
-private:
-	int dimension;
-
 public:
+	inline int dimension() const; // gets Array::length
+	Vector(); // goes with Array::initialize
 	Vector(int d);
 	Vector(const Vector& other);
-
 	Vector& operator=(const Vector& other); // copy
-	void print();
-	void print_fancy();
 
 	Scalar mag();
 	void normalize();
@@ -31,5 +26,10 @@ public:
 	Vector operator/(Scalar scale);
 
 	Scalar operator*(const Vector& other); // dot product
+
+	void print();
+	void print_fancy();
+	void print_horizontal();
+
 };
 #endif
