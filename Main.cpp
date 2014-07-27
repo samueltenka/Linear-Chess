@@ -16,13 +16,15 @@ void main()
 	V[2] = 4;
 	Vector W(3);
 	W = V;
-	W += V;
-	W.normalize();
+	W += (W+V*2)/2;
+	V.normalize();
 
+	cout << "V = " << endl;
 	V.print_fancy();
-	cout << V.mag() << endl;
+	cout << "|V| = " << V.mag() << endl;
+	cout << "W = " << endl;
 	W.print_fancy();
-	cout << W.mag() << endl;
+	cout << "|W| = " << W.mag() << endl;
 	
 	// END:
 	cout << "tada!" << endl;
