@@ -47,32 +47,24 @@ Vector& Vector::operator/=(Scalar scale)
 	return *this;
 }
 
-////
-//// Vector-Returning Operators:
-//Vector Vector::operator+(const Vector& other)
-//{
-//	return Vector(*this) += other;
-//}
-//Vector Vector::operator-(const Vector& other)
-//{
-//	Vector rtrn(dimension);
-//	rtrn = *this;
-//	return (rtrn -= other);
-//}
-//Vector Vector::operator*(Scalar scale)
-//{
-//	Vector rtrn(dimension);
-//	rtrn = *this;
-//	return (rtrn *= scale);
-//}
-//Vector Vector::operator/(Scalar scale)
-//{
-//	Vector rtrn(dimension);
-//	rtrn = *this;
-//	rtrn /= scale;
-//	rtrn.print_fancy();
-//	return rtrn;
-//}
+//
+// Vector-Returning Operators:
+Vector Vector::operator+(const Vector& other)
+{
+	return Vector(*this) += other;
+}
+Vector Vector::operator-(const Vector& other)
+{
+	return Vector(*this) -= other;
+}
+Vector Vector::operator*(Scalar scale)
+{
+	return Vector(*this) *= scale;
+}
+Vector Vector::operator/(Scalar scale)
+{
+	return Vector(*this) /= scale;
+}
 
 //
 // Dot Product:
