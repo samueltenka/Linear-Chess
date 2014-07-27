@@ -25,7 +25,16 @@ void main()
 	cout << "W = " << endl;
 	W.print_fancy();
 	cout << "|W| = " << W.mag() << endl;
-	
+
+	// TEST MatrixBasic.cpp:
+	Matrix M(3, 3);
+	M[0][0] =  0;  M[1][0] = +1;  M[2][0] = +2;
+	M[0][1] = +2;  M[1][1] =  0;  M[2][1] = +1;
+	M[0][2] = -1;  M[1][2] = -1;  M[2][2] =  0;
+	Matrix A(M);
+	Matrix S = A;
+	S.print_fancy();
+
 	// END:
 	cout << "tada!" << endl;
 	char l;
