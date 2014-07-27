@@ -11,17 +11,17 @@ private:
 public:
 	Vector(int d);
 	Vector();
-	Vector operator=(Vector other); // copy
+	Vector& operator=(Vector other); // copy
 	void print();
 	void print_fancy();
 
 	Scalar mag();
 	void normalize();
 
-	Vector operator+=(Vector other);
-	Vector operator-=(Vector other);
-	Vector operator*=(Scalar scale);
-	Vector operator/=(Scalar scale);
+	Vector& operator+=(Vector other);
+	Vector& operator-=(Vector other);
+	Vector& operator*=(Scalar scale);
+	Vector& operator/=(Scalar scale);
 
 	Vector operator+(Vector other);
 	Vector operator-(Vector other);	
