@@ -11,8 +11,9 @@ private:
 
 public:
 	Vector(int d);
-	Vector();
-	Vector& operator=(Vector& other); // copy
+	Vector(const Vector& other);
+
+	Vector& operator=(const Vector& other); // copy
 	void print();
 	void print_fancy();
 
