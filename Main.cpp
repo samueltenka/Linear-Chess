@@ -6,21 +6,24 @@
 #include <iostream>
 using namespace std;
 
+
 void main()
 {
-	// TEST VectorBasic.cpp:
-	Vector V(5);
-	V[0] = 0;
-	V[1] = 3;
-	V[2] = -9.8;
-	V[3] = 3;
-	V[4] = 1;
-	V.print_fancy();
-
-	Vector W(5);
+	// TEST VectorArith.cpp:
+	Vector V(3);
+	V[0] = 1;
+	V[1] = 2;
+	V[2] = 4;
+	Vector W(3);
 	W = V;
-	W.print_fancy();
+	W += V;
+	W.normalize();
 
+	V.print_fancy();
+	cout << V.mag() << endl;
+	W.print_fancy();
+	cout << W.mag() << endl;
+	
 	// END:
 	cout << "tada!" << endl;
 	char l;
