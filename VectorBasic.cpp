@@ -8,13 +8,13 @@ Vector::Vector(int d):
 	Array(d)
 {
 }
-Vector& Vector::operator=(Vector other) // copy
+Vector& Vector::operator=(Vector& other) // copy
 {
 	for(int r = 0; r < dimension; r++)
 	{
 		(*this)[r] = other[r];
 	}
-	return *this;
+	return (*this);
 }
 void Vector::print()
 {
