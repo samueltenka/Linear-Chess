@@ -9,25 +9,26 @@ using namespace std;
 
 void main()
 {
-	// TEST MatrixArithmetic.cpp:
+	// TEST MatrixEigen.cpp:
 	Matrix M(3, 3);
-	M[0][0] =  0;  M[0][1] = +1;  M[0][2] = +2;
-	M[1][0] = +2;  M[1][1] =  0;  M[1][2] = +1;
-	M[2][0] = -1;  M[2][1] = -1;  M[2][2] =  0;
+	M[0][0] =  1;  M[0][1] =  0;  M[0][2] =  0;
+	M[1][0] =  0;  M[1][1] = -2;  M[1][2] =  0;
+	M[2][0] =  0;  M[2][1] =  0;  M[2][2] =  3;
+	cout << "eigenvectors of: " << endl;
 	M.print_fancy();
+	cout << "are:" << endl;
+	M.eigenvectors().print_rowvectors();
+	cout << endl;
 
-	cout << "squared: " << endl;
-	(M*M).print_fancy();
+	Matrix T(3, 3);
+	T[0][0] =  1;  T[0][1] =  1;  T[0][2] =  0;
+	T[1][0] =  1;  T[1][1] =  2;  T[1][2] =  2;
+	T[2][0] =  0;  T[2][1] =  2;  T[2][2] =  3;
+	cout << "eigenvectors of: " << endl;
+	T.print_fancy();
+	cout << "are:" << endl;
+	T.eigenvectors().print_rowvectors();
 
-	cout << "doubled: " << endl;
-	(M+M).print_fancy();
-
-	Vector V(3);
-	V[0] = 1;
-	V[1] = 2;
-	V[2] = 4;
-	cout << "on vector: " << endl;
-	(M*V).print_fancy();
 
 	// END:
 	cout << "tada!" << endl;
