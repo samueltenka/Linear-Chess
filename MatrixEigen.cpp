@@ -1,5 +1,7 @@
 #include "Matrix.h"
 #include <random>
+#include <iostream>
+using namespace std;
 
 #define TOLERANCE 0.0001 // one in ten thousand
 
@@ -26,20 +28,15 @@ Vector Matrix::biggest_eigenvector() const
 		
 		while(true) // dangerous! might not exit!
 		{
+			//cout << "    multiplying..." << endl;
 			Vector better = (*this) * guess;
+			//cout << "      done!" << endl;
 			better.normalize();
 			better.positivify();
 			if((better-guess).mag() < TOLERANCE)
 			{
 				break;
 			}
-			
-			//// HERE WAS THE CODE THAT SHOWED THE PROBLEM OF NEGATIVE EIGENVALUES,
-			//// A PROBLEM MANIFESTED BY better == -guess and hence better-guess != zero, 
-			//// A PROBLEM NOW FIXED BY CALLING Vector::positivify.
-			//Matrix P(3, d);
-			//P[0] = guess; P[1] = better; P[2] = better-guess;
-			//P.print_fancy();
 			
 			guess = better;
 		}
@@ -56,13 +53,15 @@ void Matrix::remove_from_span(Vector target)
 	}
 }
 
-Matrix Matrix::eigenvectors() const
+Matrix Matrix::eigenvectors(int number) const
 {
-	Matrix rtrn(height, width);
-
-	Matrix M(*this);
-	for(int r = 0; r < height; r++)
+	Matrix rtrn(number, width);
+	
+	Matrix M = *this;
+	//cout << "hei";
+	for(int r = 0; r < number; r++)
 	{
+		cout << "r = " << r << endl;
 		Vector next_eigenvector = M.biggest_eigenvector();
 
 		M.remove_from_span(next_eigenvector);	// on account of this, new eigenvectors 
