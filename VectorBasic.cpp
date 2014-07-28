@@ -2,7 +2,8 @@
 #include <iostream>
 using namespace std;
 
-#define SPACE 7
+#define SPACE 5
+#define HORIZONTAL_SPACE 7
 
 
 //
@@ -34,14 +35,14 @@ Vector& Vector::operator=(const Vector& other) // copy
 
 //
 // Printing:
-void Vector::print()
+void Vector::print() const
 {
 	for(int r = 0; r < dimension(); r++)
 	{
 		printf("%*.2f\n", SPACE, (*this)[r]);
 	}
 }
-void Vector::print_fancy()
+void Vector::print_fancy() const
 {
 	for(int r = 0; r < dimension(); r++)
 	{
@@ -60,10 +61,10 @@ void Vector::print_fancy()
 		}
 	}
 }
-void Vector::print_horizontal()
+void Vector::print_horizontal() const
 {
 	for(int r = 0; r < dimension(); r++)
 	{
-		printf("%*.2f ", SPACE, (*this)[r]);
+		printf("%*.2f ", HORIZONTAL_SPACE, (*this)[r]);
 	}
 }
