@@ -33,8 +33,9 @@ private:
 	void remove_from_span(Vector target);
 	Vector biggest_eigenvector() const; // probabilistic: might not exit, and might not be biggest.
 public:
-	Matrix eigenvectors() const;	// rows of rtrn are (orthonormal) eigenvectors,
-									// so that V*rtrn changes standard coordinates into eigenbasis-coordinates.
+	Matrix eigenvectors(int number) const;	// returns top number-many eigenvectors, by eigen-value,
+											// as (orthonormal) rows. In other words, so that:
+											// V*rtrn changes standard coordinates into eigenbasis-coordinates.
 
 	void print() const;
 	void print_fancy() const;
