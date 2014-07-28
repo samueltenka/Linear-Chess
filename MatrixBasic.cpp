@@ -47,7 +47,7 @@ Matrix& Matrix::operator=(const Matrix& other)
 
 //
 // Print functions:
-void Matrix::print()
+void Matrix::print() const
 {
 	for(int r = 0; r < height; r++)
 	{
@@ -55,7 +55,7 @@ void Matrix::print()
 		cout << endl;
 	}
 }
-void Matrix::print_fancy()
+void Matrix::print_fancy() const
 {
 	for(int r = 0; r < height; r++)
 	{
@@ -74,6 +74,14 @@ void Matrix::print_fancy()
 			cout << " \\ "; row.print_horizontal(); cout << "/ ";
 		}
 
+		cout << endl;
+	}
+}
+void Matrix::print_rowvectors() const
+{
+	for(int r = 0; r < height; r++)
+	{
+		(*this)[r].print_fancy();
 		cout << endl;
 	}
 }
