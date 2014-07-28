@@ -8,8 +8,8 @@ class Matrix: public Array<Vector>	// array of rows
 private:
 	int height, width;
 
-	Vector row(int r); // used for arithmetic
-	Vector column(int c); //  ` ` `
+	Vector row(int r) const; // used for arithmetic
+	Vector column(int c) const; //  ` ` `
 
 public:
 
