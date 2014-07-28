@@ -12,24 +12,28 @@ public:
 	Vector(const Vector& other);
 	Vector& operator=(const Vector& other); // copy
 
-	Scalar mag();
-	void normalize();
-
 	Vector& operator+=(const Vector& other);
 	Vector& operator-=(const Vector& other);
 	Vector& operator*=(Scalar scale);
 	Vector& operator/=(Scalar scale);
 
-	Vector operator+(const Vector& other);
-	Vector operator-(const Vector& other);	
-	Vector operator*(Scalar scale);
-	Vector operator/(Scalar scale);
+	Vector operator+(const Vector& other) const;
+	Vector operator-(const Vector& other) const;	
+	Vector operator*(Scalar scale) const;
+	Vector operator/(Scalar scale) const;
 
-	Scalar operator*(const Vector& other); // dot product
+	Scalar operator*(const Vector& other) const; // dot product
+	Vector perpendicular(const Vector& axis) const;
+	Vector projection(const Vector& axis) const;
+	inline Scalar mag2() const;
+	inline Scalar mag() const;
+	void normalize();
+	void positivify();	// used as standardizer in Matrix::biggest_eigenvector
+						// to exit even when eigenvalue negative.
 
-	void print();
-	void print_fancy();
-	void print_horizontal();
+	void print() const;
+	void print_fancy() const;
+	void print_horizontal() const;
 
 };
 #endif
