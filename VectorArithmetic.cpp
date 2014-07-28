@@ -1,22 +1,11 @@
 #include "Vector.h"
-#include <math.h>
+
 
 // 
-// Norm stuff:
-Scalar Vector::mag()
-{
-	return sqrt((*this) * (*this));
-}
-void Vector::normalize()
-{
-	(*this) /= mag();
-}
-
-// 
-// Operator-Equals:
+// Operators with Assignment:
 Vector& Vector::operator+=(const Vector& other)
 {
-	for(int r = 0; r < dimension; r++)
+	for(int r = 0; r < dimension(); r++)
 	{
 		(*this)[r] += other[r];
 	}
@@ -24,7 +13,7 @@ Vector& Vector::operator+=(const Vector& other)
 }
 Vector& Vector::operator-=(const Vector& other)
 {
-	for(int r = 0; r < dimension; r++)
+	for(int r = 0; r < dimension(); r++)
 	{
 		(*this)[r] -= other[r];
 	}
@@ -32,7 +21,7 @@ Vector& Vector::operator-=(const Vector& other)
 }
 Vector& Vector::operator*=(Scalar scale)
 {
-	for(int r = 0; r < dimension; r++)
+	for(int r = 0; r < dimension(); r++)
 	{
 		(*this)[r] *= scale;
 	}
@@ -40,7 +29,7 @@ Vector& Vector::operator*=(Scalar scale)
 }
 Vector& Vector::operator/=(Scalar scale)
 {
-	for(int r = 0; r < dimension; r++)
+	for(int r = 0; r < dimension(); r++)
 	{
 		(*this)[r] /= scale;
 	}
@@ -48,32 +37,20 @@ Vector& Vector::operator/=(Scalar scale)
 }
 
 //
-// Vector-Returning Operators:
-Vector Vector::operator+(const Vector& other)
+// Plain Operators (no assignment):
+Vector Vector::operator+(const Vector& other) const
 {
 	return Vector(*this) += other;
 }
-Vector Vector::operator-(const Vector& other)
+Vector Vector::operator-(const Vector& other) const
 {
 	return Vector(*this) -= other;
 }
-Vector Vector::operator*(Scalar scale)
+Vector Vector::operator*(Scalar scale) const
 {
 	return Vector(*this) *= scale;
 }
-Vector Vector::operator/(Scalar scale)
+Vector Vector::operator/(Scalar scale) const
 {
 	return Vector(*this) /= scale;
-}
-
-//
-// Dot Product:
-Scalar Vector::operator*(const Vector& other)
-{
-	Scalar rtrn = 0.0;
-	for(int r = 0; r < dimension; r++)
-	{
-		rtrn += (*this)[r] * other[r];
-	}
-	return rtrn;
 }
