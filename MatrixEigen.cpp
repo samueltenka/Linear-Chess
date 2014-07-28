@@ -1,74 +1,37 @@
+#include "Scalar.h"
+#include "Array.h"
+#include "Vector.h"
 #include "Matrix.h"
-#include <random>
 
-#define TOLERANCE 0.0001 // one in ten thousand
+#include <iostream>
+using namespace std;
 
 
-Vector random_unit_vector(int dimension) // not quite uniform on sphere, since corners of cubes get more.
+void main()
 {
-	Vector rtrn(dimension);
+	// TEST MatrixEigen.cpp:
+	Matrix M(3, 3);
+	M[0][0] =  1;  M[0][1] =  0;  M[0][2] =  0;
+	M[1][0] =  0;  M[1][1] = -2;  M[1][2] =  0;
+	M[2][0] =  0;  M[2][1] =  0;  M[2][2] =  3;
+	cout << "eigenvectors of: " << endl;
+	M.print_fancy();
+	cout << "are:" << endl;
+	M.eigenvectors().print_rowvectors();
+	cout << endl;
 
-	for(int r = 0; r < dimension; r++)
-	{
-		rtrn[r] = rand() - RAND_MAX/2;
-	}
+	Matrix T(3, 3);
+	T[0][0] =  1;  T[0][1] =  1;  T[0][2] =  0;
+	T[1][0] =  1;  T[1][1] =  2;  T[1][2] =  2;
+	T[2][0] =  0;  T[2][1] =  2;  T[2][2] =  3;
+	cout << "eigenvectors of: " << endl;
+	T.print_fancy();
+	cout << "are:" << endl;
+	T.eigenvectors().print_rowvectors();
 
-	rtrn.normalize();
-	return rtrn;
-}
 
-Vector Matrix::biggest_eigenvector() const
-{
-	if(height == width)
-	{
-		int d = height;
-		Vector guess = random_unit_vector(d);
-		
-		while(true) // dangerous! might not exit!
-		{
-			Vector better = (*this) * guess;
-			better.normalize();
-			better.positivify();
-			if((better-guess).mag() < TOLERANCE)
-			{
-				break;
-			}
-			
-			//// HERE WAS THE CODE THAT SHOWED THE PROBLEM OF NEGATIVE EIGENVALUES,
-			//// A PROBLEM MANIFESTED BY better == -guess and hence better-guess != zero, 
-			//// A PROBLEM NOW FIXED BY CALLING Vector::positivify.
-			//Matrix P(3, d);
-			//P[0] = guess; P[1] = better; P[2] = better-guess;
-			//P.print_fancy();
-			
-			guess = better;
-		}
-
-		return guess;
-	}
-}
-
-void Matrix::remove_from_span(Vector target)
-{
-	for(int r = 0; r < height; r++)
-	{
-		(*this)[r] = (*this)[r].perpendicular(target);
-	}
-}
-
-Matrix Matrix::eigenvectors() const
-{
-	Matrix rtrn(height, width);
-
-	Matrix M(*this);
-	for(int r = 0; r < height; r++)
-	{
-		Vector next_eigenvector = M.biggest_eigenvector();
-
-		M.remove_from_span(next_eigenvector);	// on account of this, new eigenvectors 
-												//must be perpendicular to all previous ones.
-		rtrn[r] = next_eigenvector;
-	}
-
-	return rtrn;
+	// END:
+	cout << "tada!" << endl;
+	char l;
+	cin >> l;
 }
