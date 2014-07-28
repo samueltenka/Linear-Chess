@@ -9,26 +9,22 @@ using namespace std;
 
 void main()
 {
-	// TEST MatrixEigen.cpp:
-	Matrix M(3, 3);
-	M[0][0] =  1;  M[0][1] =  0;  M[0][2] =  0;
-	M[1][0] =  0;  M[1][1] = -2;  M[1][2] =  0;
-	M[2][0] =  0;  M[2][1] =  0;  M[2][2] =  3;
-	cout << "eigenvectors of: " << endl;
-	M.print_fancy();
-	cout << "are:" << endl;
-	M.eigenvectors().print_rowvectors();
-	cout << endl;
-
-	Matrix T(3, 3);
-	T[0][0] =  1;  T[0][1] =  1;  T[0][2] =  0;
-	T[1][0] =  1;  T[1][1] =  2;  T[1][2] =  2;
-	T[2][0] =  0;  T[2][1] =  2;  T[2][2] =  3;
-	cout << "eigenvectors of: " << endl;
-	T.print_fancy();
-	cout << "are:" << endl;
-	T.eigenvectors().print_rowvectors();
-
+	// TEST MatrixEigen.cpp on large matrices:
+	Matrix M(20, 20);
+	for(int r = 0; r < 20; r++)
+	{
+		for(int c = 0; c <= r; c++)
+		{
+			M[c][r] = M[r][c] = rand()%5;
+		}
+	}
+	cout << "computing eigenvectors..." << endl;
+	Matrix E = M.eigenvectors(20);
+	E[19].print_fancy();
+	Vector V = M*E[19];
+	V.normalize();
+	V.print_fancy();
+	cout << "done!" << endl;
 
 	// END:
 	cout << "tada!" << endl;
