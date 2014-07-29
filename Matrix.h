@@ -29,6 +29,7 @@ public:
 	Matrix operator/(Scalar scale) const;
 	Vector operator*(const Vector& v) const; // action on vector
 
+	// Eigenstuff:
 private:
 	void remove_from_span(Vector target);
 	Vector biggest_eigenvector() const; // probabilistic: might not exit, and might not be biggest.
@@ -37,8 +38,19 @@ public:
 											// as (orthonormal) rows. In other words, so that:
 											// V*rtrn changes standard coordinates into eigenbasis-coordinates.
 
+	// PCA stuff (builds on Eigenstuff):
+	// (here, we interpret input matrices as scatterclouds of rows)
+	Matrix transpose() const;
+	Vector center_of_mass() const;
+	void center(); // centers scattercloud around zero.
+	Matrix covariance_matrix() const;
+	Matrix principal_components(int number) const;
+
+	//
+	// Printing:
 	void print() const;
 	void print_fancy() const;
+	void print_fancy_intuitive() const;
 	void print_rowvectors() const;
 };
 #endif
