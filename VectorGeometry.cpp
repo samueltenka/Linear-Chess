@@ -41,6 +41,24 @@ void Vector::normalize()
 {
 	(*this) /= mag();
 }
+void Vector::intuitive_normalize()
+{
+	normalize(); // so that num_terms > 0;
+
+	Scalar taxicab = 0;
+	int num_terms = 0;
+	for(int r = 0; r < dimension(); r++)
+	{
+		Scalar val = (*this)[r];
+		if(val > 0.9 / dimension()) // don't count any terms too small
+		{
+			taxicab += ABS(val);
+			num_terms += 1;
+		}
+	}
+
+	(*this) *= num_terms / taxicab;
+}
 
 void Vector::positivify() // ensures first non-zero element is positive.
 {
