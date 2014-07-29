@@ -4,9 +4,8 @@
 #include "Vector.h"
 #include "Matrix.h"
 
-//#include "ChessDimensions.h"
-//#include "ChessPosition.h"
-//#include "ChessGraphics.h"
+#include "ChessDimensions.h"
+#include "ChessPosition.h"
 
 #include "GraphicsBitmap.h"
 
@@ -18,26 +17,12 @@ void main()
 {
 	//
 	// Painting test:
+	ChessPosition CP;
 	Bitmap C(256, 256);
+	
+	CP.set_up();
 
-	Bitmap S(32, 32);
-	S.read_from("C:\\Users\\Sam\\Desktop\\Fall_2014\\Chess\\Programs\\square.bmp");
-	for(int rank = 0; rank < 8; rank++)
-	{
-		for(int file = 0; file < 8; file++)
-		{
-			if((rank+file)%2 == 0) continue;
-
-			C.paint_icon(S, 1.0, rank*32, file*32);
-		}
-	}
-
-	Bitmap I(32, 32);
-	I.read_from("C:\\Users\\Sam\\Desktop\\Fall_2014\\Chess\\Programs\\red_king.bmp");
-
-	C.paint_icon(I, 0.2, 60, 60);
-	C.paint_icon(I, 0.8, 120, 40);
-	C.paint_icon(I, 0.8, 110, 45);
+	CP.paint(C);
 	C.write_to("C:\\Users\\Sam\\Desktop\\Fall_2014\\Chess\\Programs\\canvas.bmp");
 
 
