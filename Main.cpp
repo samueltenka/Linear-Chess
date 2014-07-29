@@ -1,7 +1,14 @@
 #include "Scalar.h"
+
 #include "Array.h"
 #include "Vector.h"
 #include "Matrix.h"
+
+//#include "ChessDimensions.h"
+//#include "ChessPosition.h"
+//#include "ChessGraphics.h"
+
+#include "GraphicsBitmap.h"
 
 #include <iostream>
 using namespace std;
@@ -9,53 +16,30 @@ using namespace std;
 
 void main()
 {
-	// TEST PCA.cpp:
-	Matrix M(5, 3);
-	Vector	V0(3),
-			V1(3),
-			V2(3), 
-			V3(3), 
-			V4(3);
-	V0[0] = 0.0;
-	V0[1] = 0.0;
-	V0[2] = 0.0;
+	//
+	// Painting test:
+	Bitmap C(256, 256);
 
-	V1[0] = 1.0;
-	V1[1] = 1.0;
-	V1[2] = 1.0;
+	Bitmap S(32, 32);
+	S.read_from("C:\\Users\\Sam\\Desktop\\Fall_2014\\Chess\\Programs\\square.bmp");
+	for(int rank = 0; rank < 8; rank++)
+	{
+		for(int file = 0; file < 8; file++)
+		{
+			if((rank+file)%2 == 0) continue;
 
-	V2[0] = 2.0;
-	V2[1] = 2.0;
-	V2[2] = 2.0;
+			C.paint_icon(S, 1.0, rank*32, file*32);
+		}
+	}
 
-	V3[0] = 1.1;
-	V3[1] = 0.9;
-	V3[2] = 1.0;
+	Bitmap I(32, 32);
+	I.read_from("C:\\Users\\Sam\\Desktop\\Fall_2014\\Chess\\Programs\\red_king.bmp");
 
-	V4[0] = 1.2;
-	V4[1] = 0.8;
-	V4[2] = 1.001;
+	C.paint_icon(I, 0.2, 60, 60);
+	C.paint_icon(I, 0.8, 120, 40);
+	C.paint_icon(I, 0.8, 110, 45);
+	C.write_to("C:\\Users\\Sam\\Desktop\\Fall_2014\\Chess\\Programs\\canvas.bmp");
 
-	M[0] = V0;
-	M[1] = V1;
-	M[2] = V2;
-	M[3] = V3;
-	M[4] = V4;
-	
-	cout << "The principal components of the following dataset " << endl;
-	M.print_rowvectors();
-	
-	Matrix P = M.principal_components(3);
-	cout << "are: " << endl;
-	P.print_fancy();
-	
-	cout << "or, more intuitively scaled: " << endl;
-	P.print_fancy_intuitive();
-
-	Matrix C(M);
-	//C.center();
-	//C.print_fancy();
-	
 
 	// END:
 	cout << "tada!" << endl;
