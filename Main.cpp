@@ -10,21 +10,18 @@ using namespace std;
 void main()
 {
 	// TEST MatrixEigen.cpp on large matrices:
-	Matrix M(20, 20);
-	for(int r = 0; r < 20; r++)
+	Matrix M(100, 100);
+	for(int r = 0; r < 100; r++)
 	{
 		for(int c = 0; c <= r; c++)
 		{
 			M[c][r] = M[r][c] = rand()%5;
 		}
 	}
-	cout << "computing eigenvectors..." << endl;
-	Matrix E = M.eigenvectors(20);
-	E[19].print_fancy();
-	Vector V = M*E[19];
-	V.normalize();
-	V.print_fancy();
-	cout << "done!" << endl;
+	cout << "First two eigenvectors of M" << endl;
+	cout << "are:" << endl;
+	Matrix E = M.eigenvectors(2);
+	E.print_fancy();
 
 	// END:
 	cout << "tada!" << endl;
