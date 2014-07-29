@@ -11,6 +11,7 @@ public:
 	Vector(int d);
 	Vector(const Vector& other);
 	Vector& operator=(const Vector& other); // copy
+	void zero(); // zeroes out all components
 
 	Vector& operator+=(const Vector& other);
 	Vector& operator-=(const Vector& other);
@@ -28,8 +29,10 @@ public:
 	inline Scalar mag2() const;
 	inline Scalar mag() const;
 	void normalize();
-	void positivify();	// used as standardizer in Matrix::biggest_eigenvector
+	void positivify();	// standardizes representatives of rays;
+						// used in MatrixEigen.cpp (Matrix::biggest_eigenvector)
 						// to exit even when eigenvalue negative.
+	void intuitive_normalize(); // based on taxicab magnitude with modifications.
 
 	void print() const;
 	void print_fancy() const;
