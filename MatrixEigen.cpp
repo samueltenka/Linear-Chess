@@ -21,28 +21,22 @@ Vector random_unit_vector(int dimension) // not quite uniform on sphere, since c
 
 Vector Matrix::biggest_eigenvector() const
 {
-	if(height == width)
-	{
-		int d = height;
-		Vector guess = random_unit_vector(d);
-		
-		while(true) // dangerous! might not exit!
-		{
-			//cout << "    multiplying..." << endl;
-			Vector better = (*this) * guess;
-			//cout << "      done!" << endl;
-			better.normalize();
-			better.positivify();
-			if((better-guess).mag() < TOLERANCE)
-			{
-				break;
-			}
-			
-			guess = better;
-		}
+	Vector guess = random_unit_vector(height);
 
-		return guess;
+	while(true) // dangerous! might not exit!
+	{
+		Vector better = (*this) * guess;
+		better.normalize();
+		better.positivify();
+		if((better-guess).mag() < TOLERANCE)
+		{
+			break;
+		}
+			
+		guess = better;
 	}
+
+	return guess;
 }
 
 void Matrix::remove_from_span(Vector target)
@@ -57,11 +51,9 @@ Matrix Matrix::eigenvectors(int number) const
 {
 	Matrix rtrn(number, width);
 	
-	Matrix M = *this;
-	//cout << "hei";
+	Matrix M(*this);
 	for(int r = 0; r < number; r++)
 	{
-		cout << "r = " << r << endl;
 		Vector next_eigenvector = M.biggest_eigenvector();
 
 		M.remove_from_span(next_eigenvector);	// on account of this, new eigenvectors 
