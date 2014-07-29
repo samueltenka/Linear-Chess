@@ -19,7 +19,6 @@ void main()
 	// Painting test:
 	ChessPosition CP;
 	Bitmap C(256, 256);
-	
 	CP.set_up();
 
 	CP.paint(C);
