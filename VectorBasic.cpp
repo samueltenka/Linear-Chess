@@ -7,7 +7,7 @@ using namespace std;
 
 
 //
-// Data-management (i.e. Dimension-getter, Constructors w/ Initializer, and Copier)
+// Data-management (i.e. Dimension-getter, Constructors, Copier, Initializer-by-Zeroer)
 inline int Vector::dimension() const
 {
 	return length;
@@ -32,6 +32,13 @@ Vector& Vector::operator=(const Vector& other) // copy
 	}
 	return (*this);
 }
+void Vector::zero()
+{
+	for(int r = 0; r < dimension(); r++)
+	{
+		(*this)[r] = 0;
+	}
+}
 
 //
 // Printing:
@@ -39,7 +46,7 @@ void Vector::print() const
 {
 	for(int r = 0; r < dimension(); r++)
 	{
-		printf("%*.2f\n", SPACE, (*this)[r]);
+		printf("%*.4f\n", SPACE, (*this)[r]);
 	}
 }
 void Vector::print_fancy() const
@@ -49,15 +56,15 @@ void Vector::print_fancy() const
 		Scalar value = (*this)[r];
 		if(r == 0) // top:
 		{
-			printf(" / %*.2f \\ \n", SPACE, value);
+			printf(" / %*.4f \\ \n", SPACE, value);
 		}
 		else if(r < dimension()-1) // main body:
 		{
-			printf("|  %*.2f  |\n", SPACE, value);
+			printf("|  %*.4f  |\n", SPACE, value);
 		}
 		else // bottom:
 		{
-			printf(" \\ %*.2f / \n", SPACE, value);
+			printf(" \\ %*.4f / \n", SPACE, value);
 		}
 	}
 }
@@ -65,6 +72,6 @@ void Vector::print_horizontal() const
 {
 	for(int r = 0; r < dimension(); r++)
 	{
-		printf("%*.2f ", HORIZONTAL_SPACE, (*this)[r]);
+		printf("%*.4f ", HORIZONTAL_SPACE, (*this)[r]);
 	}
 }
