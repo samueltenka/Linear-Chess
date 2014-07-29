@@ -77,6 +77,17 @@ void Matrix::print_fancy() const
 		cout << endl;
 	}
 }
+void Matrix::print_fancy_intuitive() const
+{
+	// intuitivify copy
+	Matrix copy(*this);
+	for(int r = 0; r < height; r++)
+	{
+		copy[r].intuitive_normalize();
+	}
+
+	copy.print_fancy();
+}
 void Matrix::print_rowvectors() const
 {
 	for(int r = 0; r < height; r++)
