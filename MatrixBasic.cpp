@@ -13,7 +13,7 @@ Matrix::Matrix(int h, int w):
 	// initialize rows:
 	for(int r = 0; r < height; r++)
 	{
-		(*this)[r].initialize(h);
+		(*this)[r].initialize(w);
 	}
 }
 Matrix::Matrix(const Matrix& other):
@@ -24,7 +24,7 @@ Matrix::Matrix(const Matrix& other):
 	// initialize rows:
 	for(int r = 0; r < height; r++)
 	{
-		(*this)[r].initialize(height);
+		(*this)[r].initialize(width);
 	}
 
 	// copy:
