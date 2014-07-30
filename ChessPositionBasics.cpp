@@ -7,7 +7,7 @@ ChessPosition::ChessPosition()
 	set_up();
 }
 
-Piece* ChessPosition::piece_at(Square square)
+Piece*& ChessPosition::piece_at(Square square)
 {
 	return board[square.rank][square.file];
 }
@@ -17,7 +17,7 @@ void ChessPosition::set_up()
 	Species setup[8] = {rook, knight, bishop, queen, king, bishop, knight, rook};
 
 	for(int f = 0; f < SIDELENGTH; f++) board[0][f] = new Piece(black, setup[f]);
-	for(int f = 0; f < SIDELENGTH; f++) board[1][f] = NULL; //new Piece(black, pawn);
+	for(int f = 0; f < SIDELENGTH; f++) board[1][f] = new Piece(black, pawn);
 
 	for(int r = 2; r < 6; r++)
 		for(int f = 0; f < SIDELENGTH; f++) board[r][f] = NULL;
@@ -44,11 +44,20 @@ void ChessPosition::print()
 		for(int f = 0; f < SIDELENGTH; f++)
 		{
 			if(board[r][f] != NULL)
-			cout << static_cast<int>(board[r][f]->species) << " ";
+				cout << static_cast<int>(board[r][f]->species) << " ";
+			else
+				cout << "  ";
 		}
 		cout << endl;
 	}
 }
 
+void ChessPosition::display(const char* filename)
+{
+	ChessVector V = state();
 
+	Bitmap I(256, 256);
+	V.paint(I);
+	I.write_to(filename);
+}
 
