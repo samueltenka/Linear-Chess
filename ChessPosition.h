@@ -39,6 +39,6 @@ public:
 	void print();
 
 	void move(Move m);
-	Move from_algebraic(const char* algebraic);
+	Move from_algebraic(const char* algebraic, Color color);
 };
 #endif
