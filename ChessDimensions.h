@@ -40,6 +40,7 @@ struct Piece
 		color = static_cast<Color>(index%NUM_COLORS);
 	}
 	Piece(Color c, Species s): color(c), species(s) {}
+	bool operator==(const Piece& other) {return color==other.color && species==other.species;}
 
 	inline bool can_arrive_at(Square destination, ChessPosition& CP, bool takingOK, bool taking_required); // needs piece's color info
 };
