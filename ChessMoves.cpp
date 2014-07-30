@@ -153,8 +153,8 @@ ChessVector ChessPosition::state()
 	return rtrn;
 }
 
-void ChessPosition::move(Move m) // if move empty square to place, place will become empty.
-{
+void ChessPosition::move(Move m)	// if move empty square to place, place will become empty.
+{									// if move place to itself, memory won't leak, but both will become empty.
 	Piece* p = piece_at(m.source);
 	//if(p != NULL)
 	//{
@@ -164,9 +164,9 @@ void ChessPosition::move(Move m) // if move empty square to place, place will be
 	piece_at(m.source) = NULL;
 }
 
-Move ChessPosition::from_algebraic(const char* algebraic) // pe4, Nf3, no special notation for taking
+Move ChessPosition::from_algebraic(const char* algebraic, Color color) // pe4, Nf3, no special notation for taking
 {
-	// determine species:
+	// determine piece:
 	Species species;
 	char s = algebraic[0];
 	switch(s)
@@ -180,6 +180,7 @@ Move ChessPosition::from_algebraic(const char* algebraic) // pe4, Nf3, no specia
 	default:
 		cout << "piece name illegal!" << endl; return Move(Square(0, 0), Square(0, 0));
 	}
+	Piece piece(color, species);
 	
 	// determine destination:
 	char file = algebraic[1], rank = algebraic[2];
@@ -190,7 +191,7 @@ Move ChessPosition::from_algebraic(const char* algebraic) // pe4, Nf3, no specia
 	{
 		Square source(i);
 		if(!source.empty_on(*this) &&
-			piece_at(source)->species == species)
+			*piece_at(source) == piece)
 		{
 			LinkedList<Square> PDs = possible_destinations(source, *piece_at(source));
 			for(LLIterator<Square> d(PDs); d.can_continue(); d.next())
