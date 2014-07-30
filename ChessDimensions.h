@@ -21,9 +21,10 @@ struct Square
 		rank = index%SIDELENGTH;
 	}
 	Square(int r, int f): rank(r), file(f) {}
+	bool operator==(const Square& other) {return rank==other.rank && file==other.file;}
 
-	inline bool empty_on(ChessPosition& CP);
-	inline bool on_board();
+	bool empty_on(ChessPosition& CP);
+	bool on_board();
 };
 enum Color {black, white};
 enum Species {pawn, knight, bishop, rook, queen, king};
