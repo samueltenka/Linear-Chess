@@ -26,7 +26,16 @@ void main()
 	L.append(2);
 	L.append(4);
 	L.append(8);
-	for(LLIterator<int> i(L); i.can_continue(); i.next())
+
+	LinkedList<int> Y;
+	Y.append(3);
+	Y.append(5);
+
+	L.append(Y);
+
+	for(LLIterator<int> i(L);
+		i.can_continue();
+		i.next())
 	{
 		cout << i.value() << endl;
 	}
