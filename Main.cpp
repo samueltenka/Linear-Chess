@@ -24,7 +24,12 @@ void main()
 	// Test manual-movement:
 	ChessPosition C;
 	C.set_up();
-	C.move(C.from_algebraic("pe4"));
+
+	C.move(C.from_algebraic("pe4", black));
+	C.move(C.from_algebraic("pe5", white));
+	C.move(C.from_algebraic("Nf3", black));
+	C.move(C.from_algebraic("Nc6", white));
+	
 	C.print();
 
 	C.display("C:\\Users\\Sam\\Desktop\\Fall_2014\\Chess\\Programs\\canvas3.bmp");
