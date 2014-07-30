@@ -61,10 +61,10 @@ public:
 public:
 	LinkedList(): end(new LLNode<T>) {start = end;}	// or could do "start(new LLNode<T>), end(start)",
 													// but this way jives with phrasing in "append".
-	LinkedList(const LinkedList<T>& LL) {*this = LL;}
+	LinkedList(const LinkedList<T>& LL): end(new LLNode<T>) {start = end; *this = LL;}
 
-	LinkedList& operator=(const LinkedList<T>& LL) // same T-values, but the LL-structure is copied from scratch.
-	{
+	LinkedList& operator=(const LinkedList<T>& LL)	// same T-values, but the LL-structure is copied from scratch.
+	{												// so iff T copies by-reference, one LL-copy might affect another.
 		for(LLIterator<T> i(LL); i.can_continue(); i.next())
 		{
 			append(i.value());
