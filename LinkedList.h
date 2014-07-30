@@ -38,7 +38,7 @@ private:
 	LLNode<T>* node;
 	LLIterator(LLNode<T>* n): node(n) {}
 public:
-	LLIterator(LinkedList<T>& LL): node(LL.start) {}
+	LLIterator(const LinkedList<T>& LL): node(LL.start) {}
 	bool can_continue() {
 		return node->successor != NULL;
 	}
@@ -61,7 +61,16 @@ public:
 public:
 	LinkedList(): end(new LLNode<T>) {start = end;}	// or could do "start(new LLNode<T>), end(start)",
 													// but this way jives with phrasing in "append".
-	LinkedList(const LinkedList<T>& other): start(other.start), end(other.end) {cout << "bei";}
+	LinkedList(const LinkedList<T>& LL) {*this = LL;}
+
+	LinkedList& operator=(const LinkedList<T>& LL) // same T-values, but the LL-structure is copied from scratch.
+	{
+		for(LLIterator<T> i(LL); i.can_continue(); i.next())
+		{
+			append(i.value());
+		}
+		return (*this);
+	}
 
 	void append(T element)	// don't worry about loops forming: all the node stuff is
 	{						// managed behind the scenes. We merely input a value.
@@ -72,14 +81,20 @@ public:
 		end->successor->predecessor = end;	// s1<-->2<-->4<-->e8<-->
 		end = end->successor;				// s1<-->2<-->4<--> 8<-->e
 	}
+	void chop()
+	{
+		LLNode<T>* neighbor = start->successor;
+		delete start;
+		neighbor->predecessor = NULL;
+		start = neighbor;
+	}
+
 	~LinkedList()
 	{
-		for(LLNode<T>* i = start; i != NULL; )	// could use iterator, but this is easier,
-		{										// <-- i5<--> 6<-->...	//
-			LLNode<T>* next = i->successor;		// <-- i5<-->n6<-->...	// since an iterator won't let you
-			delete i;							//       <-- n6<-->...	// delete before
-			i = next;							//       <-- i6<-->...	// incrementing.
-		}
+		while(!is_empty())
+		{
+			chop();	// inefficient, since unnecessarily moves around starts and nullify predecessors
+		}			// but oh well! (see 7/29/14, 9:40pm "LinkedList.h" GitHub commit for better version.)
 	}
 
 	inline bool is_empty() {return start==end;}
@@ -108,7 +123,7 @@ public:
 	}
 	void append(LinkedList& LL)	// copies LL
 	{
-		for(LLIterator<int> i(LL); i.can_continue(); i.next())
+		for(LLIterator<T> i(LL); i.can_continue(); i.next())
 		{
 			append(i.value());
 		}
