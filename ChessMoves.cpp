@@ -1,12 +1,14 @@
 #include "ChessPosition.h"
 #include <cstdlib>
+#include <iostream>
+using namespace std;
 
 
-inline bool Square::empty_on(ChessPosition& CP)
+bool Square::empty_on(ChessPosition& CP)
 {
 	return CP.piece_at((*this)) == NULL;
 }
-inline bool Square::on_board()
+bool Square::on_board()
 {
 	return	(0 <= rank) && (rank < SIDELENGTH) && 
 			(0 <= file) && (file < SIDELENGTH);
@@ -149,4 +151,56 @@ ChessVector ChessPosition::state()
 	}
 
 	return rtrn;
+}
+
+void ChessPosition::move(Move m) // if move empty square to place, place will become empty.
+{
+	Piece* p = piece_at(m.source);
+	//if(p != NULL)
+	//{
+		delete piece_at(m.destination); // delete's OK w/NULL
+		piece_at(m.destination) = p;
+	//}
+	piece_at(m.source) = NULL;
+}
+
+Move ChessPosition::from_algebraic(const char* algebraic) // pe4, Nf3, no special notation for taking
+{
+	// determine species:
+	Species species;
+	char s = algebraic[0];
+	switch(s)
+	{
+	case 'p': species = pawn; break;
+	case 'N': species = knight; break;
+	case 'B': species = bishop; break;
+	case 'R': species = rook; break;
+	case 'Q': species = queen; break;
+	case 'K': species = king; break;
+	default:
+		cout << "piece name illegal!" << endl; return Move(Square(0, 0), Square(0, 0));
+	}
+	
+	// determine destination:
+	char file = algebraic[1], rank = algebraic[2];
+	Square destination(rank-'1', file-'a');
+
+	// determine source:
+	for(int i = 0; i < NUM_SQUARES; i++)
+	{
+		Square source(i);
+		if(!source.empty_on(*this) &&
+			piece_at(source)->species == species)
+		{
+			LinkedList<Square> PDs = possible_destinations(source, *piece_at(source));
+			for(LLIterator<Square> d(PDs); d.can_continue(); d.next())
+			{
+				if(d.value() == destination)
+					return Move(source, destination);
+			}
+		}
+	}
+
+	// hopefully, we don't end up here;
+	cout << "move not found!" << endl; return Move(Square(0, 0), Square(0, 0));
 }
