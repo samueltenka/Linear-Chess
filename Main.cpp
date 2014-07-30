@@ -20,15 +20,16 @@ using namespace std;
 
 void main()
 {
+	//
+	// Test manual-movement:
 	ChessPosition C;
 	C.set_up();
+	C.move(C.from_algebraic("pe4"));
 	C.print();
 
-	ChessVector V = C.state();
+	C.display("C:\\Users\\Sam\\Desktop\\Fall_2014\\Chess\\Programs\\canvas3.bmp");
 
-	Bitmap I(256, 256);
-	V.paint(I);
-	I.write_to("C:\\Users\\Sam\\Desktop\\Fall_2014\\Chess\\Programs\\canvas2.bmp");
+
 
 
 	// END:
